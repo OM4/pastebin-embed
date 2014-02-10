@@ -3,7 +3,7 @@
 Plugin Name: Pastebin Embed
 Plugin URI: http://om4.com.au/wordpress-plugins/
 Description: Easily embed Pastebin.com snippets in WordPress. To use, simply paste the URL to a pastebin snippet on its own line on a WordPress post or page.
-Version: 1.0.0
+Version: 1.0.1
 Author: OM4
 Author URI: http://om4.com.au/
 Text Domain: pastebin-embed
@@ -39,7 +39,8 @@ class OM4_Pastebin_Embed {
 	}
 
 	public function embed_handler( $matches, $attr, $url, $rawattr ) {
-		return sprintf( '<script src="http://pastebin.com/embed_js.php?i=%s"></script>', $matches[1] );
+		$scheme = is_ssl() ? 'https' : 'http';
+		return sprintf( '<script src="' . $scheme . '://pastebin.com/embed_js.php?i=%s"></script>', $matches[1] );
 	}
 
 
